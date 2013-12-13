@@ -1,19 +1,24 @@
 package Locale::TextDomain::UTF8;
 
 use 5.010001;
+use strict;
+use warnings;
 
 # VERSION
 
 use Encode             ();
 use Locale::Messages   ();
-use Locale::TextDomain ();
 
 $ENV{OUTPUT_CHARSET} = 'UTF-8';
 sub import {
-    my ($class, $text_domain) = @_;
-    Locale::TextDomain->import;
+    my ($class, $textdomain, @search_dirs) = @_;
+
+    my $pkg = caller;
+
+    eval qq[package $pkg; use Locale::TextDomain \$textdomain, \@search_dirs;];
+    die $@ if $@;
     Locale::Messages::bind_textdomain_filter(
-        $text_domain, \&Encode::decode_utf8);
+        $textdomain, \&Encode::decode_utf8);
 }
 
 1;
