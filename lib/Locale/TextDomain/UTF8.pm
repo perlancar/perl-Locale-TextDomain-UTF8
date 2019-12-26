@@ -1,10 +1,14 @@
 package Locale::TextDomain::UTF8;
 
-use 5.010001;
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
+# IFUNBUILT
 use strict;
 use warnings;
-
-# VERSION
+# END IFUNBUILT
 
 use Encode             ();
 use Locale::Messages   ();
@@ -16,7 +20,7 @@ sub import {
     my $pkg = caller;
 
     eval qq[package $pkg; use Locale::TextDomain \$textdomain, \@search_dirs;];
-    die $@ if $@;
+    die if $@;
     Locale::Messages::bind_textdomain_filter(
         $textdomain, \&Encode::decode_utf8);
 }
