@@ -63,6 +63,8 @@ mentioned in the SEE ALSO section.
 
 =head1 SEE ALSO
 
+L<Locale::TextDomain::UTF8::IfEnv>
+
 L<Locale::TextDomain>
 
 L<Locale::Messages>
